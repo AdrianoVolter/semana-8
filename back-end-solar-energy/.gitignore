@@ -1,0 +1,7 @@
+node_modules
+.env
+docker-compose.yml
+yarn.lock
+package-lock.json
+.vscode
+express.js
