@@ -7,7 +7,7 @@
 O projeto é dividido em duas partes principais:
 
 <ol>
-<li><strong>Frontend</strong>: Esta parte do projeto é responsável pela interface do usuário e permite que os usuários visualizem dados relacionados à energia solar, como produção e consumo. O frontend foi desenvolvido utilizando tecnologias modernas de front-end, como React, Redux e Material-UI.
+<li><strong>Frontend</strong>: Esta parte do projeto é responsável pela interface do usuário e permite que os usuários visualizem dados relacionados à energia solar, como produção e consumo. O frontend foi desenvolvido utilizando tecnologias modernas de front-end, como React, Bootstrap , .
 
 <li><strong>Backend</strong>: O backend é responsável por gerenciar os dados relacionados à energia solar, autenticação de usuários, e fornecer uma API para o frontend. Foi construído usando Node.js e Express.js, com um banco de dados Postgres para armazenar os dados. O Sequelize é utilizado como ORM (Object-Relational Mapping) para facilitar a interação com o banco de dados. A autenticação é realizada utilizando JWT (JSON Web Tokens) para garantir a segurança das informações.
 
