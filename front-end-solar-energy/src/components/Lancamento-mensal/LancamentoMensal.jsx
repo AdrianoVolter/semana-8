@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import Api from "../../api/Api";
 import styles from "./Lancamento-mensal.module.css";
 
 export const LancamentoGeracaoMensal = () => {
@@ -15,8 +15,7 @@ export const LancamentoGeracaoMensal = () => {
   };
   const token = localStorage.getItem("token");
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/v1/unidades", {
+    Api.get("/unidades", {
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
@@ -47,8 +46,7 @@ export const LancamentoGeracaoMensal = () => {
 
     if (formulario) {
       console.log(lancamento);
-      axios
-        .post("http://localhost:3000/api/v1/geracao", lancamento, {
+      Api.post("/lancamentos", lancamento, {
           headers: {
             "Content-Type": "application/json",
             Authorization: token,
