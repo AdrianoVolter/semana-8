@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Table, Button } from "react-bootstrap";
 import styles from "./listaUnidade.module.css";
+import Api from "../../api/Api";
 
 export default function ListaUnidades({ mudarFormulario }) {
   const [data, setData] = useState([]);
   const token = localStorage.getItem("token");
 
   const fetchData = () => {
-    fetch(`http://localhost:3000/api/v1/unidades`, {
+    Api.get("/unidades", {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import Api from "../../api/Api";
 import { Form } from "../form/Form";
 import "./Cadastro.css";
 import PropTypes from "prop-types";
@@ -45,7 +45,6 @@ export const CadastroUnidade = ({ mudarFormulario }) => {
       className: "checkbox-label",
     },
   ];
-  const ENDPOINT_UNIDADES = "http://localhost:3000/api/v1/unidades";
 
   const validarInputs = (formData) => {
     const { apelido, local, marca, modelo } = formData;
@@ -58,7 +57,7 @@ export const CadastroUnidade = ({ mudarFormulario }) => {
 
   const postNovaUnidade = async (novaUnidade) => {
     try {
-      const updatedResponse = await axios.post(ENDPOINT_UNIDADES, novaUnidade, {
+      const updatedResponse = await Api.post("/unidades", novaUnidade, {
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
