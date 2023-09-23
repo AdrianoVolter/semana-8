@@ -1,14 +1,22 @@
 const { config } = require("dotenv");
 config();
+const Sequelize = require('sequelize');
+
 module.exports = {
-  dialect: process.env.DIALECT, 
-  host: process.env.HOST, 
-  username: process.env.USERNAMEDB, 
-  password: process.env.PASSWORDDB, 
-  database: process.env.DATABASE, 
-  port: process.env.PORT, 
+  dialect: 'postgres', // Altere para 'postgres' para o ElephantSQL
+  host: process.env.HOST,
+  username: process.env.USERNAMEDB,
+  password: process.env.PASSWORDDB,
+  database: process.env.DATABASE,
+  port: process.env.PORT,
   define: {
-    underscored: true, //Traduz os campos para snake_case
-    underscoredAll: true, //Traduz todos os campos para snake_case
+    underscored: true,
+    underscoredAll: true,
   },
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false // Use esta opção para evitar erros de certificado quando estiver usando SSL com o ElephantSQL
+    }
+  }
 };
