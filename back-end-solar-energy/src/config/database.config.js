@@ -1,14 +1,17 @@
 const { config } = require("dotenv");
 config();
+const Sequelize = require('sequelize');
+
 module.exports = {
-  dialect: process.env.DIALECT, 
-  host: process.env.HOST, 
-  username: process.env.USERNAMEDB, 
-  password: process.env.PASSWORDDB, 
-  database: process.env.DATABASE, 
-  port: process.env.PORT, 
+  dialect: 'postgres', 
+  host: process.env.HOST,
+  username: process.env.USERNAMEDB,
+  password: process.env.PASSWORDDB,
+  database: process.env.DATABASE,
+  port: process.env.PORT,
   define: {
-    underscored: true, //Traduz os campos para snake_case
-    underscoredAll: true, //Traduz todos os campos para snake_case
+    underscored: true,
+    underscoredAll: true,
   },
 };
+

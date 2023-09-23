@@ -40,7 +40,7 @@ class Server {
     } catch (error) {
       console.error(
         "Não foi possível conectar com o banco de dados:",
-        error.message
+        error
       );
     }
   }
