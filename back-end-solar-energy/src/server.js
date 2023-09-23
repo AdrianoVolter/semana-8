@@ -21,13 +21,13 @@ class Server {
   async middlewares(app) {
     app.use(cors());
     app.use(express.json());
-    const path = require("path");
-    const fs = require("fs");
-    const log = fs.createWriteStream(
-      path.join(__dirname, './logs', `express.log`),
-      { flags: 'a' }
-    );
-    app.use(morgan('combined', { stream: log }));
+    // const path = require("path");
+    // const fs = require("fs");
+    // const log = fs.createWriteStream(
+    //   path.join(__dirname, './logs', `express.log`),
+    //   { flags: 'a' }
+    // );
+    // app.use(morgan('combined', { stream: log }));
     app.use(morgan("dev")); // Mova esta linha para cima
     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   }
