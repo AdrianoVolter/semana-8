@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 export default axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: "https://solar-energy-api.cyclic.app/",
     responseType: "json"
 });
 
