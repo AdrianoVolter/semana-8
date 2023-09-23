@@ -11,7 +11,7 @@ import {
   Tooltip,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import axios from "axios";
+import Api from "../../api/Api";
 
 export const LineChart = () => {
   const [listaUnidades, setListaUnidades] = useState([]);
@@ -26,8 +26,7 @@ export const LineChart = () => {
 
   // Faz a busca de informações no endpoint unidades
   const buscaUnidades = () => {
-    axios
-      .get("http://localhost:3000/api/v1/unidades", {
+    Api.get("/unidades", {
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
@@ -39,8 +38,7 @@ export const LineChart = () => {
 
   // Faz a busca de informações no endpoint lancamentos
   const buscaListaLancamentos = () => {
-    axios
-      .get("http://localhost:3000/api/v1/geracao",{
+    Api.get("/lancamentos", {
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
