@@ -60,7 +60,7 @@ export const CadastroUnidade = ({ mudarFormulario }) => {
       const updatedResponse = await Api.post("/unidades", novaUnidade, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
       });
       if (updatedResponse.status === 201) {
