@@ -28,11 +28,11 @@ export const LineChart = () => {
   // Faz a busca de informações no endpoint unidades
   const buscaUnidades = () => {
     Api.get("/unidades", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => setListaUnidades(response.data.unidades))
       .catch((error) => alert(error));
   };
@@ -40,11 +40,11 @@ export const LineChart = () => {
   // Faz a busca de informações no endpoint lancamentos
   const buscaListaLancamentos = () => {
     Api.get("/geracao", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => setListaLancamentos(response.data))
       .catch((error) => alert(error));
   };
@@ -62,7 +62,7 @@ export const LineChart = () => {
         estaAtiva = true;
       }
     });
-
+    console.log(listaLancamentos);
     //
     if (estaAtiva) {
       if (somaLancamentos[element.reference_date]) {
@@ -105,7 +105,8 @@ export const LineChart = () => {
       },
     ],
   };
-
+  console.log(somaLancamentos);
+  console.log(data);
   // Configurações do gráfico
   const options = {
     responsive: true,
@@ -123,12 +124,12 @@ export const LineChart = () => {
     },
     scales: {
       y: {
-        min: 0,
-        position: "right",
+        beginAtZero: true, // Isso garante que o eixo Y comece em zero
+        position: "left", // Posição do eixo Y (pode ser "left" ou "right" dependendo do layout desejado)
       },
     },
   };
-
+  console.log(data);
   return (
     <div id="lineChart">
       <Line options={options} data={data} />
