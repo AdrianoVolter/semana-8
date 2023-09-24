@@ -18,14 +18,14 @@ const CadastroUsuario = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const response = Api.get("api/v1/usuario");
+    const response = Api.get("/usuario");
     setData(response.data);
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const response = Api.post("api/v1/usuario", {
+    const response = Api.post("/usuario", {
       name,
       email,
       password,

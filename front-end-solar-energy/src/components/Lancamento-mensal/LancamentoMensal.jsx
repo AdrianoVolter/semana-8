@@ -8,27 +8,41 @@ export const LancamentoGeracaoMensal = () => {
   const [data, setData] = useState("");
   const [total, setTotal] = useState("");
   const [formulario, setFormulario] = useState(false);
+  const [token , setToken] = useState("");
   const lancamento = {
     unidade_id: unidadeGeradora,
     reference_date: data,
     total_generated: total,
   };
-  const token = localStorage.getItem("token");
   useEffect(() => {
-    Api.get("/unidades", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      })
-      .then((response) => {
-        setUnidades([...response.data.unidades]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // Obtenha o token do localStorage
+    const storedToken = localStorage.getItem("token");
+    setToken(storedToken); // Defina o token no estado
   }, []);
 
+  useEffect(() => {
+    // Verifique se o token está presente
+    if (token) {
+      // Faça a chamada à API com o token
+      Api.get("/unidades", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Use "Bearer" antes do token
+        },
+      })
+        .then((response) => {
+          setUnidades([...response.data.unidades]);
+          console.log(response.data.unidades);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+        
+    } else {
+      // Lidere com o caso em que o token não está presente
+      console.log("Token não encontrado.");
+    }
+  }, [token]);
   const validar = () => {
     if (unidadeGeradora && data && total) {
       setFormulario(true);
@@ -44,16 +58,15 @@ export const LancamentoGeracaoMensal = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (formulario) {
-      console.log(lancamento);
-      Api.post("/lancamentos", lancamento, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
+    if (formulario && token) {
+      Api.post("/geracao", lancamento, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Use "Bearer" antes do token
+        },
         })
         .then((response) => {
-          alert("Lançamento realizado com sucesso!");
+          alert(`Lançamento cadastrado com sucesso! ${response.data.message}`);
           limparCampos();
         })
         .catch((error) => {

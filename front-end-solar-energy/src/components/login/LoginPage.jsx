@@ -29,7 +29,7 @@ const Login = () => {
 
     try {
       // Faça uma chamada para a API para autenticar o usuário usando Axios
-      const response = await Api.post("api/v1/login", {
+      const response = await Api.post("/login", {
         email,
         password,
       });
