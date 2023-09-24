@@ -9,6 +9,7 @@ import {
   Title,
   Legend,
   Tooltip,
+  Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import Api from "../../api/Api";
@@ -29,7 +30,7 @@ export const LineChart = () => {
     Api.get("/unidades", {
         headers: {
           "Content-Type": "application/json",
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => setListaUnidades(response.data.unidades))
@@ -38,28 +39,26 @@ export const LineChart = () => {
 
   // Faz a busca de informações no endpoint lancamentos
   const buscaListaLancamentos = () => {
-    Api.get("/lancamentos", {
+    Api.get("/geracao", {
         headers: {
           "Content-Type": "application/json",
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => setListaLancamentos(response.data))
       .catch((error) => alert(error));
-    console.log(listaLancamentos);
   };
-
   // Lógica para cálculo dos dados do gráfico
   const unidadesAtivas = listaUnidades.filter(
-    (unidade) => unidade.active == true
+    (unidades) => unidades.active == true
   );
 
   // Passa os dados do array para o objeto que vai conter os dados do gráfico
   let somaLancamentos = {};
   listaLancamentos.forEach((element) => {
     let estaAtiva = false;
-    Object.values(unidadesAtivas).forEach((unidade) => {
-      if (unidade.id === element.unidade_id) {
+    Object.values(unidadesAtivas).forEach((unidades) => {
+      if (unidades.id === element.unidade_id) {
         estaAtiva = true;
       }
     });
@@ -87,7 +86,8 @@ export const LineChart = () => {
     PointElement,
     Legend,
     Title,
-    Tooltip
+    Tooltip,
+    Filler
   );
 
   // Declaração dos dados usados e configurações visuais do gráfico

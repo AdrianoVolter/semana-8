@@ -1,4 +1,4 @@
-import axios from "axios";
+import Api from "../api/Api";
 import { useEffect, useState } from "react";
 
 export default function dadosUnidades() {
@@ -8,24 +8,24 @@ export default function dadosUnidades() {
   const [carregando, setCarregando] = useState(true);
   const token = localStorage.getItem("token");
 
-  const urlUnidades = "http://localhost:3000/api/v1/unidades";
-
   useEffect(() => {
     async function fetchUnidades() {
       try {
-        const response = await axios.get(urlUnidades, {
+        const response = await Api.get("/unidades", {
           headers: {
             "Content-Type": "application/json",
-            Authorization: token,
+            Authorization: `Bearer ${token}`,
           },
         });
         setUnidades(response.data.unidades);
         setCarregando(false);
         setUnidadesAtivas(
-          response.data.unidades.filter((unidade) => unidade.ativa === false)
+          
+          response.data.unidades.filter((unidades) => unidades.active === false)
         );
+
         setUnidadeInativa(
-          response.data.unidades.filter((unidade) => unidade.ativa === true)
+          response.data.unidades.filter((unidades) => unidades.active === true)
         );
       } catch (error) {
         console.log(error);

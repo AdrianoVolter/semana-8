@@ -1,4 +1,4 @@
-import axios from "axios";
+import Api from "../api/Api";
 import { useEffect, useState } from "react";
 
 export default function dadosLacamentos() {
@@ -6,15 +6,13 @@ export default function dadosLacamentos() {
   const [carregando, setCarregando] = useState(true);
   const token = localStorage.getItem("token");
 
-  const urlLancamento = "http://localhost:3000/api/v1/geracao";
-
   useEffect(() => {
     async function fetchLancamentos() {
       try {
-        const response = await axios.get(urlLancamento, {
+        const response = await Api.get("/geracao", {
           headers: {
             "Content-Type": "application/json",
-            Authorization: token,
+            Authorization: `Bearer ${token}`,
           },
         });
         console.log(response.data);
@@ -22,7 +20,7 @@ export default function dadosLacamentos() {
         setMediaConsumo(
           parseFloat(
             response.data
-              .map((lancamentos) => lancamentos.total)
+              .map((geracao) => geracao.total_generated)
               .reduce((a, b) => a + b, 0) / response.data.length
           ).toFixed(0)
         );
