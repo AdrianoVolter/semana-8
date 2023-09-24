@@ -19,7 +19,12 @@ class Server {
   }
   // middlewares
   async middlewares(app) {
-    app.use(cors());
+    const corsOptions = {
+      origin: 'https://semana-8.vercel.app',
+      optionsSuccessStatus: 200, // Algumas versões do navegador requerem esse código de status
+    };
+  
+    app.use(cors(corsOptions));
     app.use(express.json());
     // const path = require("path");
     // const fs = require("fs");
