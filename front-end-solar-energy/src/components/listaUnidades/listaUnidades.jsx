@@ -12,10 +12,12 @@ export default function ListaUnidades({ mudarFormulario }) {
     Api.get("/unidades", {
       headers: {
         "Content-Type": "application/json",
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        setData([...response.data.unidades]);
+      })
       .then((data) => {
         console.log(data);
         setData(data.unidades);
