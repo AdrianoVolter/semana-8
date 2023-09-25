@@ -1,16 +1,21 @@
 const request = require('supertest');
 
-
-it ('Deve retornar 401 ,token não informado GET', async () => {
-    const response = await request('http://localhost:3000').get('/api/v1/unidades');
-    expect(response.status).toEqual(401);
-    //console.log(response.body); 
-}
-);  
-
-it ('Deve retornar 401 ,token não informado POST', async () => {
-    const response = await request('http://localhost:3000').post('/api/v1/unidades');
-    expect(response.status).toEqual(401);
-    //console.log(response.body);
-}
-);
+describe('Teste de autenticação', () => {
+    it('Deve retornar 401 quando o token não é informado', async () => {
+      const response = await request('http://localhost:3000')
+        .post('/api/v1/geracao')
+        .send({ /* dados que você deseja enviar na solicitação POST */ });
+  
+      expect(response.status).toBe(401);
+    });
+    it('Deve retornar 200 quando o token é informado', async () => {
+        // Suponha que você tenha um token válido para autenticação
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkcmlhbm8uai52b2x0ZXJAaG90bWFpbC5jb20iLCJpYXQiOjE2OTU2NjgyNjJ9.lnSyZvyNt9skNpQCM__9HlZzZuCRwbvA7x0xB6wSFrE';
+    
+        const response = await request('http://localhost:3000')
+          .get('/api/v1/geracao')
+          .set('Authorization', `Bearer ${token}`)
+            
+        expect(response.status).toBe(200);
+      });
+    });
