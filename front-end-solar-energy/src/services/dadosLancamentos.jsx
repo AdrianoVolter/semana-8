@@ -15,7 +15,6 @@ export default function dadosLacamentos() {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response.data);
         setCarregando(false);
         setMediaConsumo(
           parseFloat(

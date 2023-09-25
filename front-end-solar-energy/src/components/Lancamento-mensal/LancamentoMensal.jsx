@@ -32,15 +32,11 @@ export const LancamentoGeracaoMensal = () => {
       })
         .then((response) => {
           setUnidades([...response.data.unidades]);
-          console.log(response.data.unidades);
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
         
-    } else {
-      // Lidere com o caso em que o token não está presente
-      console.log("Token não encontrado.");
     }
   }, [token]);
   const validar = () => {
@@ -70,7 +66,7 @@ export const LancamentoGeracaoMensal = () => {
           limparCampos();
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     } else {
       alert("Preencha todos os campos!");

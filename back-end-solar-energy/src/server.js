@@ -21,18 +21,10 @@ class Server {
   async middlewares(app) {
     const corsOptions = {
       origin: 'https://semana-8.vercel.app',
-      optionsSuccessStatus: 200, // Algumas versões do navegador requerem esse código de status
+      optionsSuccessStatus: 200, 
     };
-  
     app.use(cors(corsOptions));
     app.use(express.json());
-    // const path = require("path");
-    // const fs = require("fs");
-    // const log = fs.createWriteStream(
-    //   path.join(__dirname, './logs', `express.log`),
-    //   { flags: 'a' }
-    // );
-    // app.use(morgan('combined', { stream: log }));
     app.use(morgan("dev")); // Mova esta linha para cima
     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   }
@@ -65,3 +57,13 @@ class Server {
 }
 
 module.exports = { Server };
+
+
+
+// const path = require("path");
+    // const fs = require("fs");
+    // const log = fs.createWriteStream(
+    //   path.join(__dirname, './logs', `express.log`),
+    //   { flags: 'a' }
+    // );
+    // app.use(morgan('combined', { stream: log }));
