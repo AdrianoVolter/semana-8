@@ -9,6 +9,12 @@ module.exports = {
   password: process.env.PASSWORDDB,
   database: process.env.DATABASE,
   port: process.env.PORT,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  },
   define: {
     underscored: true,
     underscoredAll: true,
