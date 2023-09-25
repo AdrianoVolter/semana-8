@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 export default axios.create({
-    baseURL: "https://azul-verde-gaivota-toga.cíclico.app/api/v1",
+    baseURL: "https://solar-energy-api.cyclic.app//api/v1",
     responseType: "json"
 });
 
