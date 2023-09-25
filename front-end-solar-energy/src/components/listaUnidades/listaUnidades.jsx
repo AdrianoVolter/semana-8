@@ -19,7 +19,6 @@ export default function ListaUnidades({ mudarFormulario }) {
         setData([...response.data.unidades]);
       })
       .then((data) => {
-        console.log(data);
         setData(data.unidades);
       })
       .catch((err) => {

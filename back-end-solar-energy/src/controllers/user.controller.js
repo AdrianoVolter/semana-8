@@ -8,7 +8,6 @@ class UserController {
   async login(request, response) {
     try {
       const { email, password } = request.body;
-
       const user = await User.findOne({
         where: {
           email,
@@ -29,11 +28,6 @@ class UserController {
 
       const payload = { email: user.email };
       const token = sign(payload, process.env.SECRET_JWT);
-      console.log(
-
-        process.env.SECRET_JWT
-        
-        )
       return response.status(200).send({
         token: token,
         message: "Login realizado com sucesso!",
@@ -65,13 +59,11 @@ class UserController {
   async createUser(request, response) {
     try {
       const { name, email, password } = request.body;
-
       if (!name || !email || !password) {
         return response.status(400).send({
           message: "Todos os campos são obrigatórios!",
         });
       }
-
       const user = await User.findOne({
         where: {
           email,

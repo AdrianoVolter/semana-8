@@ -36,7 +36,6 @@ export const LineChart = () => {
       .then((response) => setListaUnidades(response.data.unidades))
       .catch((error) => alert(error));
   };
-
   // Faz a busca de informações no endpoint lancamentos
   const buscaListaLancamentos = () => {
     Api.get("/geracao", {
@@ -62,7 +61,6 @@ export const LineChart = () => {
         estaAtiva = true;
       }
     });
-    console.log(listaLancamentos);
     //
     if (estaAtiva) {
       if (somaLancamentos[element.reference_date]) {
@@ -105,8 +103,6 @@ export const LineChart = () => {
       },
     ],
   };
-  console.log(somaLancamentos);
-  console.log(data);
   // Configurações do gráfico
   const options = {
     responsive: true,
@@ -129,7 +125,6 @@ export const LineChart = () => {
       },
     },
   };
-  console.log(data);
   return (
     <div id="lineChart">
       <Line options={options} data={data} />

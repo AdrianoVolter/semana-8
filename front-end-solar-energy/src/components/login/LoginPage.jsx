@@ -14,11 +14,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLoginSuccess = (token) => {
-    // Usuário autenticado com sucesso
     localStorage.setItem("token", token);
-    // Exiba a mensagem de sucesso
     setMessage("Usuário autenticado com sucesso.");
-    // Redirecione para a página de dashboard após um breve atraso
     setTimeout(() => {
       navigate("/dashboard");
     }, 1500); 
@@ -28,7 +25,6 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      // Faça uma chamada para a API para autenticar o usuário usando Axios
       const response = await Api.post("/login", {
         email,
         password,
