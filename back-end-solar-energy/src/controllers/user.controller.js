@@ -26,8 +26,8 @@ class UserController {
         });
       }
 
-      const payload = { email: user.email };
-      const token = sign(payload, process.env.SECRET_JWT,{
+      const payload = { email: user.email , id: user.id };
+      const token = sign(payload, process.env.SECRET_KEY,{
         expiresIn: 300,
       });
       return response.status(200).send({

@@ -1,4 +1,3 @@
-// dependencias
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -6,6 +5,7 @@ const morganBody = require("morgan-body");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("../swagger");
 const { config } = require("dotenv");
+
 config();
 
 // classe server
@@ -20,8 +20,8 @@ class Server {
   // middlewares
   async middlewares(app) {
     const corsOptions = {
-      origin: 'https://semana-8.vercel.app',
-      optionsSuccessStatus: 200, 
+      origin: "https://semana-8.vercel.app",
+      optionsSuccessStatus: 200,
     };
     app.use(cors(corsOptions));
     app.use(express.json());
@@ -35,10 +35,7 @@ class Server {
       await connection.authenticate();
       console.log("Conexão com o banco de dados estabelecida com sucesso!");
     } catch (error) {
-      console.error(
-        "Não foi possível conectar com o banco de dados:",
-        error
-      );
+      console.error("Não foi possível conectar com o banco de dados:", error);
     }
   }
   // routes
@@ -48,22 +45,12 @@ class Server {
   }
   // start server
   async initializeServer(app) {
-    const PORT = process.env.PORT_NODE || 3000;
-    const HOST = process.env.HOST_NODE || "localhost";
+    const PORT = 3000
+    const HOST = "localhost"
     app.listen(PORT, () =>
-      console.log(`Servidor executando http://${HOST}:${PORT}`)
+      console.log(`Servidor rodando em http://${HOST}:${PORT}`)
     );
   }
 }
 
-module.exports = { Server };
-
-
-
-// const path = require("path");
-    // const fs = require("fs");
-    // const log = fs.createWriteStream(
-    //   path.join(__dirname, './logs', `express.log`),
-    //   { flags: 'a' }
-    // );
-    // app.use(morgan('combined', { stream: log }));
+module.exports = Server;
